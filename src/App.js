@@ -9,18 +9,47 @@ class App extends Component {
     super(props);
 
     this.state = {
-
+      results: ""
     }
   }
 
   componentDidMount() {
     fetch(ENDPOINT)
-    .then(response => response.json())
-    .then(data => {
-      const results = data.results;
-      console.log(results);
+      .then(response => response.json())
+      .then(data => {
+        const results = data.results;
+    
+        results.map(item=>{
+          return (
+           item.url,
 
-    });
+           fetch(item.url)
+            .then(response => response.json())
+            .then(data=> {
+               const sprite = data.sprites.front_default;
+               const name = data.forms[0].name;
+               const number = data.order;
+               const types = data.types;
+
+               console.log(sprite)
+               console.log(name)
+         
+               console.log(number)
+               console.log(types)
+
+            })
+        )});
+
+        
+
+    
+      })
+
+
+
+      
+     
+      
   }
 
 
