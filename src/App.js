@@ -1,25 +1,47 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+const ENDPOINT = 'http://pokeapi.salestock.net/api/v2/pokemon/?limit=2';
+
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+
+    }
+  }
+
+  componentDidMount() {
+    fetch(ENDPOINT)
+    .then(response => response.json())
+    .then(data => {
+      const results = data.results;
+      console.log(results);
+
+    });
+  }
+
+
+
+  
+  
+  
+
+
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="Pokemons-app">
+        <label className="Search-field__label"></label>
+        <input className="Search-field"type="text"></input>
+
+        <div className="Pokemons__container"></div>
+        
+
+         
+      
       </div>
     );
   }
