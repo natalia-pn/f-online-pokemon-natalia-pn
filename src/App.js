@@ -9,8 +9,12 @@ class App extends Component {
     super(props);
 
     this.state = {
-      results: ""
-    }
+         results: [],
+         sprite: [],
+         name: '',
+         number: '',
+         types: []
+      } 
   }
 
   componentDidMount() {
@@ -18,6 +22,7 @@ class App extends Component {
       .then(response => response.json())
       .then(data => {
         const results = data.results;
+        this.setState({results: results});
     
         results.map(item=>{
           return (
@@ -33,40 +38,30 @@ class App extends Component {
 
                console.log(sprite)
                console.log(name)
-         
                console.log(number)
                console.log(types)
-
             })
         )});
-
-        
-
-    
       })
-
-
-
-      
-     
-      
-  }
-
-
-
-  
-  
-  
-
-
+    }
 
   render() {
+
+    // const {sprite} = this.state;
     return (
       <div className="Pokemons-app">
         <label className="Search-field__label"></label>
         <input className="Search-field"type="text"></input>
 
-        <div className="Pokemons__container"></div>
+        <div className="Pokemons__container">
+          {/* {sprite.map(item => {
+            return(
+              <img className="Pokemon__sprite" alt="{item}">{item}</img>
+            )
+          })} */}
+        
+        
+        </div>
         
 
          
