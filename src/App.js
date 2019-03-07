@@ -10,6 +10,7 @@ class App extends Component {
 
     this.state = {
          results: [],
+         pokemon: [],
          sprite: [],
          name: '',
          number: '',
@@ -23,44 +24,37 @@ class App extends Component {
       .then(data => {
         const results = data.results;
         this.setState({results: results});
+
+        let pokemon = [];
+
+        results.map(item=>
+          pokemon.push(item.url));
+
+        this.setState({pokemon: pokemon})
+
+        const urlsArray = this.state.pokemon;
+
+        Promise.all(urlsArray.map(url=>fetch(url)))
+          .then(response => response.json())
+          .then(data=> {
+            const sprite = data.sprites.front_default;
+            const name = data.forms[0].name;
+            const number = data.order;
+            const types = data.types;
     
-        results.map(item=>{
-          return (
-           item.url,
-
-           fetch(item.url)
-            .then(response => response.json())
-            .then(data=> {
-               const sprite = data.sprites.front_default;
-               const name = data.forms[0].name;
-               const number = data.order;
-               const types = data.types;
-
-               console.log(sprite)
-               console.log(name)
-               console.log(number)
-               console.log(types)
-            })
-        )});
+        })
       })
     }
 
   render() {
 
-    // const {sprite} = this.state;
     return (
       <div className="Pokemons-app">
         <label className="Search-field__label"></label>
         <input className="Search-field"type="text"></input>
 
         <div className="Pokemons__container">
-          {/* {sprite.map(item => {
-            return(
-              <img className="Pokemon__sprite" alt="{item}">{item}</img>
-            )
-          })} */}
-        
-        
+          
         </div>
         
 
