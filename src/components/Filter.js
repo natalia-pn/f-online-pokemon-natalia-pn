@@ -15,6 +15,6 @@ class Filter extends Component {
 
 Filter.propTypes = {
     getSearchValue: PropTypes.func,
-  };
+};
 
 export default Filter;
