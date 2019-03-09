@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import Filter from './components/Filter';
 import PokemonsList from './components/PokemonsList';
+import {getPokemonsUrl} from './services/PokemonsRequest';
 
 
 
-const ENDPOINT = 'http://pokeapi.salestock.net/api/v2/pokemon/?limit=2';
 
 class App extends Component {
 
@@ -22,8 +22,7 @@ class App extends Component {
 
   
   componentDidMount() {
-    fetch(ENDPOINT)
-      .then(response => response.json())
+    getPokemonsUrl()
       .then(data => {
         const results = data.results;
   
@@ -58,8 +57,6 @@ class App extends Component {
   }
 
   render() {
-    const { pokemonsArray } = this.state
-
     return (
       <div className="Pokemons-app">
         <Filter getSearchValue={this.getSearchValue}/>
