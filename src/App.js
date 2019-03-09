@@ -65,7 +65,7 @@ class App extends Component {
         <Filter getSearchValue={this.getSearchValue}/>
 
         <div className="Pokemons__container">
-          <PokemonsList pokemonsArray={pokemonsArray}/>
+          <PokemonsList filterPokemons={this.filterPokemons()}/>
         </div>
       </div>
     );
