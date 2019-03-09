@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
          results: [],
          pokemon: [],
+         pokemonsList: [],
          sprite: [],
          name: '',
          number: '',
@@ -18,35 +19,35 @@ class App extends Component {
       } 
   }
 
+  
   componentDidMount() {
     fetch(ENDPOINT)
       .then(response => response.json())
       .then(data => {
         const results = data.results;
-        this.setState({results: results});
+  
+        const requestList = results.map(item=>
+          fetch(item.url));
 
-        let pokemon = [];
+        Promise.all(requestList)
+          .then(responses => {
 
-        results.map(item=>
-          pokemon.push(item.url));
+            console.log(responses)
+            
+            const responsesList = responses.map(responses => responses.json())
 
-        this.setState({pokemon: pokemon})
-
-        const urlsArray = this.state.pokemon;
-
-        Promise.all(urlsArray.map(url=>fetch(url)))
-          .then(response => response.json())
-          .then(data=> {
-            const sprite = data.sprites.front_default;
-            const name = data.forms[0].name;
-            const number = data.order;
-            const types = data.types;
-    
-        })
+            Promise.all(responsesList)
+              .then(responsesResult => {
+                this.setState({pokemonsList: responsesResult});
+                console.log(this.state.pokemonsList);
+              })
+          })
       })
-    }
+  }
+
 
   render() {
+    const { pokemonsList } = this.state
 
     return (
       <div className="Pokemons-app">
@@ -54,12 +55,27 @@ class App extends Component {
         <input className="Search-field"type="text"></input>
 
         <div className="Pokemons__container">
-          
+          <ul className="Pokemons__list">
+            {pokemonsList.map(pok=> {
+              return(
+                <li className="Pokemon__element" key={pok.id}>
+                  <div className="Image__container">
+                    <img className="Pokemon__picture" alt="pokemon" src={pok.sprites.front_default}></img>
+                    <p className="pokemon__order">id / {pok.id}</p>
+                  </div>
+                  <p className="Pokemon__name">{pok.name}</p>
+                  <ul className="Pokemon__abilities">
+                    {pok.abilities.map((item, index)=> {
+                      return(
+                        <li className="Ability" key={index}>{item.ability.name} </li>
+                      )
+                    })}
+                  </ul>
+                </li>
+              );
+            })}
+          </ul> 
         </div>
-        
-
-         
-      
       </div>
     );
   }

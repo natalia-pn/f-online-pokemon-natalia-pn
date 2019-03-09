@@ -1,5 +1,34 @@
+.pokemons__app {
+    background-color: blue;
+}
+
 .Pokemons__container {
     background-color: red;
-    height: 500px;
+    height: 100%;
+    width: 100%;
+}
+
+.Pokemons__list {
+    list-style: none;
+}
+
+.Pokemon__picture {
+    width: 150px;
+    height: 150px;
+}
+
+.Pokemon__element{
+    width: 200px;
+    background-color: green;
+    margin: 15px;
 
 }
+
+.Image__container{
+    width: 500px;
+
+}
+.Pokemon__abilities {
+    list-style: none;
+}
+
