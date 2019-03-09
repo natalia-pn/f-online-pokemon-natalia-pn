@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Filter from './components/Filter';
 
 const ENDPOINT = 'http://pokeapi.salestock.net/api/v2/pokemon/?limit=2';
 
@@ -9,14 +10,11 @@ class App extends Component {
     super(props);
 
     this.state = {
-         results: [],
-         pokemon: [],
          pokemonsList: [],
-         sprite: [],
-         name: '',
-         number: '',
-         types: []
+         searchValue: ''
       } 
+      this.getSearchValue = this.getSearchValue.bind(this);
+      this.filterPokemons = this.filterPokemons.bind(this);
   }
 
   
@@ -45,14 +43,25 @@ class App extends Component {
       })
   }
 
+  getSearchValue(e) {
+    const searchValue = e.currentTarget.value;
+    this.setState({
+      searchValue: searchValue
+    })
+  }
+
+  filterPokemons() {
+    const {pokemonsList, searchValue} = this.state;
+    return pokemonsList.filter(item => item.name.toUpperCase().includes(searchValue.toUpperCase()));
+  }
 
   render() {
     const { pokemonsList } = this.state
 
     return (
       <div className="Pokemons-app">
-        <label className="Search-field__label"></label>
-        <input className="Search-field"type="text"></input>
+        <Filter getSearchValue={this.getSearchValue}/>
+        
 
         <div className="Pokemons__container">
           <ul className="Pokemons__list">
