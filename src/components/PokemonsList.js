@@ -10,7 +10,7 @@ class PokemonsList extends Component {
                 {pokemonsArray.map(pok=> {
                 return(
                     <li className="Pokemon__element" key={pok.id}>
-                        <PokemonsDetail />
+                        <PokemonsDetail image={pok.sprites.front_default} id={pok.id} abilities={pok.abilities} />
                     </li>
                 );
                 })}
