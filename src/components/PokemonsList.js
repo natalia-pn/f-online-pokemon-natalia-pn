@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PokemonsDetail from './PokemonsDetail';
 import PropTypes from "prop-types";
 
+
 class PokemonsList extends Component {
     render() {
         const { filterPokemons } = this.props;

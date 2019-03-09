@@ -5,4 +5,3 @@ const getPokemonsUrl = () => fetch(ENDPOINT).then(response=> response.json())
 export {getPokemonsUrl};
 
 
-// const fetchPokemon = () => fetch(ENDPOINT).then(response );

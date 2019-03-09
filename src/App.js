@@ -5,8 +5,6 @@ import PokemonsList from './components/PokemonsList';
 import {getPokemonsUrl} from './services/PokemonsRequest';
 
 
-
-
 class App extends Component {
 
   constructor(props) {
@@ -16,11 +14,10 @@ class App extends Component {
          pokemonsArray: [],
          searchValue: ''
       } 
-      this.getSearchValue = this.getSearchValue.bind(this);
-      this.filterPokemons = this.filterPokemons.bind(this);
+    this.getSearchValue = this.getSearchValue.bind(this);
+    this.filterPokemons = this.filterPokemons.bind(this);
   }
 
-  
   componentDidMount() {
     getPokemonsUrl()
       .then(data => {
@@ -31,9 +28,6 @@ class App extends Component {
 
         Promise.all(requestList)
           .then(responses => {
-
-            console.log(responses)
-            
             const responsesList = responses.map(responses => responses.json())
 
             Promise.all(responsesList)
