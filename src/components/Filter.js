@@ -6,7 +6,7 @@ class Filter extends Component {
         const {getSearchValue} = this.props;
         return(
             <label className="Search-field__label">
-                <input className="Search-field"type="text" onKeyUp={getSearchValue}></input>
+                <input className="Search-field"type="text" placeholder="Search Pokémons by name"  onKeyUp={getSearchValue}></input>
             </label>
         );
     }
