@@ -11,7 +11,7 @@ class PokemonsDetail extends Component {
                     <p className="pokemon__order">id / {id}</p>
                 </div>
                 <p className="Pokemon__name">{name}</p>
-                <ul className="Pokemon__abilities">
+                <ul className="Pokemon__types">
                     {types.map((item, index)=> {
                         return(
                             <li className="Ability" key={index}>{item.type.name} </li>
