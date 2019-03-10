@@ -52,7 +52,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="Pokemons-app">
+      <div className="Pokemons__app">
         <Filter getSearchValue={this.getSearchValue}/>
 
         <div className="Pokemons__container">

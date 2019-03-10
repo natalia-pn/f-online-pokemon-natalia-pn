@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 class PokemonsDetail extends Component {
     render() {
-        const { image, id, name, abilities} = this.props;
+        const { image, id, name, types} = this.props;
         return(
             <Fragment>
                 <div className="Image__container">
@@ -12,9 +12,9 @@ class PokemonsDetail extends Component {
                 </div>
                 <p className="Pokemon__name">{name}</p>
                 <ul className="Pokemon__abilities">
-                    {abilities.map((item, index)=> {
+                    {types.map((item, index)=> {
                         return(
-                            <li className="Ability" key={index}>{item.ability.name} </li>
+                            <li className="Ability" key={index}>{item.type.name} </li>
                         )
                         })}
                 </ul>
