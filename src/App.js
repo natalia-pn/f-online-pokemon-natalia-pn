@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
+import Filter from './components/Filter';
+import PokemonsList from './components/PokemonsList';
+import {getPokemonsUrl} from './services/PokemonsRequest';
 
-const ENDPOINT = 'http://pokeapi.salestock.net/api/v2/pokemon/?limit=2';
 
 class App extends Component {
 
@@ -9,68 +11,60 @@ class App extends Component {
     super(props);
 
     this.state = {
-      results: ""
-    }
+         pokemonsArray: [],
+         searchValue: ''
+      } 
+    this.getSearchValue = this.getSearchValue.bind(this);
+    this.filterPokemons = this.filterPokemons.bind(this);
   }
 
   componentDidMount() {
-    fetch(ENDPOINT)
-      .then(response => response.json())
+    getPokemonsUrl()
       .then(data => {
         const results = data.results;
-    
-        results.map(item=>{
-          return (
-           item.url,
+  
+        const requestList = results.map(item=>
+          fetch(item.url));
 
-           fetch(item.url)
-            .then(response => response.json())
-            .then(data=> {
-               const sprite = data.sprites.front_default;
-               const name = data.forms[0].name;
-               const number = data.order;
-               const types = data.types;
+        Promise.all(requestList)
+          .then(responses => {
+            const responsesList = responses.map(responses => responses.json())
 
-               console.log(sprite)
-               console.log(name)
-         
-               console.log(number)
-               console.log(types)
-
-            })
-        )});
-
-        
-
-    
+            Promise.all(responsesList)
+              .then(responsesResult => {
+                this.setState({pokemonsArray: responsesResult});
+              })
+          })
       })
-
-
-
-      
-     
-      
   }
 
+  getSearchValue(e) {
+    const searchValue = e.currentTarget.value;
+    this.setState({
+      searchValue: searchValue
+    })
+  }
 
-
-  
-  
-  
-
-
+  filterPokemons() {
+    const {pokemonsArray, searchValue} = this.state;
+    return pokemonsArray.filter(item => item.name.toUpperCase().includes(searchValue.toUpperCase()));
+  }
 
   render() {
     return (
-      <div className="Pokemons-app">
-        <label className="Search-field__label"></label>
-        <input className="Search-field"type="text"></input>
-
-        <div className="Pokemons__container"></div>
-        
-
-         
-      
+      <div className="Pokemons__app">
+        <header className="App__header">
+          <div className="Triangle-left"></div>
+          <div className="Triangle-right"></div>
+          <Filter getSearchValue={this.getSearchValue}/>
+        </header>
+        <main className="App__main-section">
+          <div className="Pokemons__container">
+            <PokemonsList filterPokemons={this.filterPokemons()}/>
+          </div>
+          <div class="quarter-circle-bottom-left"></div>
+          <div class="quarter-circle-bottom-right"></div>
+        </main>
       </div>
     );
   }
