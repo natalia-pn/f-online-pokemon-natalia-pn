@@ -53,11 +53,18 @@ class App extends Component {
   render() {
     return (
       <div className="Pokemons__app">
-        <Filter getSearchValue={this.getSearchValue}/>
-
-        <div className="Pokemons__container">
-          <PokemonsList filterPokemons={this.filterPokemons()}/>
-        </div>
+        <header className="App__header">
+          <div className="Triangle-left"></div>
+          <div className="Triangle-right"></div>
+          <Filter getSearchValue={this.getSearchValue}/>
+        </header>
+        <main className="App__main-section">
+          <div className="Pokemons__container">
+            <PokemonsList filterPokemons={this.filterPokemons()}/>
+          </div>
+          <div class="quarter-circle-bottom-left"></div>
+          <div class="quarter-circle-bottom-right"></div>
+        </main>
       </div>
     );
   }
