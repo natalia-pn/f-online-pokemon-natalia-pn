@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import Filter from './components/Filter';
 import PokemonsList from './components/PokemonsList';
 import {getPokemonsUrl} from './services/PokemonsRequest';
@@ -62,8 +62,8 @@ class App extends Component {
           <div className="Pokemons__container">
             <PokemonsList filterPokemons={this.filterPokemons()}/>
           </div>
-          <div class="quarter-circle-bottom-left"></div>
-          <div class="quarter-circle-bottom-right"></div>
+          <div className="quarter-circle-bottom-left"></div>
+          <div className="quarter-circle-bottom-right"></div>
         </main>
       </div>
     );
