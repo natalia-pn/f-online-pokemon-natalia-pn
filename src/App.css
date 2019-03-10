@@ -3,32 +3,69 @@
 }
 
 .Pokemons__container {
-    background-color: red;
+    background-color:#FFDC00;
     height: 100%;
     width: 100%;
+}
+
+.Pokemon__element{
+    width: 250px;
+    height: 270px;
+    background-color: #FFFFFF;
+    margin: 15px;
+
 }
 
 .Pokemons__list {
     list-style: none;
 }
 
+.Image__container {
+    background-color: #DCDCDC;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+
+}
+
 .Pokemon__picture {
-    width: 150px;
-    height: 150px;
+    width: 110px;
+    height: 110px;
+    align-self: center;
+    
 }
 
-.Pokemon__element{
-    width: 200px;
-    background-color: green;
-    margin: 15px;
-
+.pokemon__order {
+    background-color: #C8C8C8;
+    width: 50px;
+    height: 25px;
+    margin-bottom: 0;
+    text-align: center;
+    text-transform: uppercase;
 }
 
-.Image__container{
-    width: 500px;
-
+.Pokemon__name {
+    font-weight: 700;
+    font-size: 22px;
+    text-transform: capitalize;
+    padding-left: 16px;
+    margin-bottom: 5px; 
 }
+
 .Pokemon__abilities {
     list-style: none;
+    display: flex;
+    padding: 0;
+    padding-left: 15px;
+}
+
+.Ability {
+    margin-right: 5px;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #808080;
+    border: 1px solid #D3D3D3;
+    border-radius: 7px;
+    padding: 3px;
 }
 
