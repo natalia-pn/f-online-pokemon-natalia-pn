@@ -6,9 +6,6 @@ import PokemonsList from './components/PokemonsList';
 import {getPokemonsUrl} from './services/PokemonsRequest';
 import PokemonCard from './components/PokemonCard';
 
-
-
-
 class App extends Component {
 
   constructor(props) {
@@ -55,6 +52,9 @@ class App extends Component {
   }
 
   render() {
+
+    const { pokemonsArray } = this.state;
+  
     return (
       <div className="Pokemons__app">
         <Switch>
@@ -63,8 +63,9 @@ class App extends Component {
               <header className="App__header">
                 <div className="Triangle-left"></div>
                 <div className="Triangle-right"></div>
-                <Filter getSearchValue={this.getSearchValue}/>
+                <Filter getSearchValue={this.getSearchValue} />
               </header>
+
               <main className="App__main-section">
                 <div className="Pokemons__container">
                   <PokemonsList filterPokemons={this.filterPokemons()}/>
@@ -73,14 +74,14 @@ class App extends Component {
                 <div className="quarter-circle-bottom-right"></div>
               </main>
             </Fragment>
+           )} /> 
 
-          )} />
-
-          <Route path="/PokemonCard/:id" render={props => <PokemonCard match={props.match} pokemonsArray={this.state.pokemonsArray} />} />
+          <Route path="/PokemonCard/:id" render={props => <PokemonCard match={props.match} pokemonsArray={pokemonsArray} />} />
         </Switch> 
       </div>
     );
   }
 }
+
 
 export default App;
