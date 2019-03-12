@@ -8,7 +8,7 @@ class PokemonCard extends Component {
         const pokemonId =  this.props.match.params.id;
 
         if(pokemonsArray.length>0 && pokemonId <pokemonsArray.length) {
-            const clickedPokemon = pokemonsArray[pokemonId];
+            const clickedPokemon = pokemonsArray[pokemonId-1];
             const {sprites, id, name, height, weight, types, abilities } = clickedPokemon;
 
             return(

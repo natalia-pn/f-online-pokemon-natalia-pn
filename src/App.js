@@ -13,7 +13,7 @@ class App extends Component {
 
     this.state = {
          pokemonsArray: [],
-         searchValue: ''
+         searchValue: '',
       } 
     this.getSearchValue = this.getSearchValue.bind(this);
     this.filterPokemons = this.filterPokemons.bind(this);
@@ -76,7 +76,7 @@ class App extends Component {
             </Fragment>
            )} /> 
 
-          <Route path="/PokemonCard/:id" render={props => <PokemonCard match={props.match} pokemonsArray={pokemonsArray} />} />
+          <Route path="/PokemonCard/:id" render={props => (<PokemonCard match={props.match} pokemonsArray={pokemonsArray} /> )} />
         </Switch> 
       </div>
     );
