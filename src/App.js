@@ -14,12 +14,14 @@ class App extends Component {
     this.state = {
          pokemonsArray: [],
          searchValue: '',
+         loadingList: false
       } 
     this.getSearchValue = this.getSearchValue.bind(this);
     this.filterPokemons = this.filterPokemons.bind(this);
   }
 
   componentDidMount() {
+    this.setState({loadingList: true})
     getPokemonsUrl()
       .then(data => {
         const results = data.results;
@@ -33,7 +35,7 @@ class App extends Component {
 
             Promise.all(responsesList)
               .then(responsesResult => {
-                this.setState({pokemonsArray: responsesResult});
+                this.setState({pokemonsArray: responsesResult, loadingList: false});
               })
           })
       })
@@ -53,7 +55,7 @@ class App extends Component {
 
   render() {
 
-    const { pokemonsArray } = this.state;
+    const { pokemonsArray, loadingList } = this.state;
   
     return (
       <div className="Pokemons__app">
@@ -76,7 +78,7 @@ class App extends Component {
             </Fragment>
            )} /> 
 
-          <Route path="/PokemonCard/:id" render={props => (<PokemonCard match={props.match} pokemonsArray={pokemonsArray} /> )} />
+          <Route path="/PokemonCard/:id" render={props => (<PokemonCard loading={loadingList}match={props.match} pokemonsArray={pokemonsArray} /> )} />
         </Switch> 
       </div>
     );

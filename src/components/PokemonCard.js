@@ -3,13 +3,22 @@ import PropTypes from "prop-types";
 
 class PokemonCard extends Component {
     render() {
-        const { pokemonsArray } = this.props;
+        const { pokemonsArray, loading } = this.props;
+        console.log(this.props)
 
-        const pokemonId =  this.props.match.params.id;
+         if(loading) {
+            return "Loading";
+         }
 
-        if(pokemonsArray.length>0 && pokemonId <pokemonsArray.length) {
-            const clickedPokemon = pokemonsArray[pokemonId-1];
-            const {sprites, id, name, height, weight, types, abilities } = clickedPokemon;
+         const pokemonId =  this.props.match.params.id;
+         const pokemon = (pokemonsArray || [] ).find(function(element) {
+             console.log(element.id, '    ', pokemonId)
+            return element.id === parseInt(pokemonId);
+          });
+          
+          console.log(pokemon)
+        if(pokemon) {
+            const {sprites, id, name, height, weight, types, abilities } = pokemon;
 
             return(
                 <Fragment>
@@ -42,6 +51,10 @@ class PokemonCard extends Component {
                 </Fragment>
             );
          }
+
+         return "There's been an error"
+
+        
     }
 }
 
